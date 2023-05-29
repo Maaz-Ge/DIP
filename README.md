@@ -1,1 +1,13 @@
-# DIP
+**Vechicle detection and counting using OpenCV**
+
+****Introduction:****
+Vehicle detection and counting is an important application in traffic management systems. It involves identifying and tracking vehicles in a given area and counting their movements. The proposed project aims to design and develop a vehicle detection and counting system using OpenCV and an attractive interface for easy access.
+
+**Implementation:**
+First I initializes several variables that will be used later in the code, including count_in and count_out for tracking the number of vehicles that cross the threshold line, line_pos for setting the position of the threshold line, offset for adjusting the position of the line, and detect for storing the coordinates of detected vehicles.
+Next, allow user to select a video file for analysis using the filedialog.askopenfilename() function from the Tkinter library. If the user selects a file, then opens it using the VideoCapture function from the OpenCV library and creates a background subtractor object using the createBackgroundSubtractorMOG2 function with a history of 100 and a variance threshold of 40.
+Then reads each frame from the video file using the read() function from the VideoCapture object. It applies background subtraction to the frame using the subtractor object and then thresholds the resulting image to create a binary mask. Then uses the findContours function from the OpenCV library to find contours in the binary image.
+Then draws a line across the frame using the line() function from the OpenCV library to represent the threshold line. It then loops over the detected contours and checks their dimensions to classify them as cars or trucks/buses. For each detected vehicle, then calculates its center and adds it to the detect list. Also draws a rectangle around each detected vehicle and a circle around its center.
+Then checks whether each detected vehicle has crossed the threshold line by looping over the detect list and checking the y-coordinate of each vehicle's center. If the y-coordinate is within a certain offset of the threshold line, then checks the x-coordinate to determine whether the vehicle is going in or out of the line. If a vehicle is going out of the line, the count_out variable is incremented, and the vehicle is removed from the detect list. If a vehicle is coming towards the line, the count_in variable is incremented, and the vehicle is removed from the detect list.
+Then displays the vehicle counts and the video feed with the detected vehicles marked by rectangles and circles. Also displays a message instructing the user to press 'q' to exit the program. Then waits for the user to press 'q' before releasing the video file and destroying the display windows.
+Finally, prints the total counts of vehicles that crossed the threshold line to the console.
